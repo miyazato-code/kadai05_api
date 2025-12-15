@@ -5,7 +5,7 @@
 - APIを使ったスクリーンセイバー
 
 ### 3. アプリのデプロイURL
-- https://miyazato-code.github.io/
+- https://miyazato-code.github.io/kadai05_api/
   
 ### 4. アプリのログイン用IDまたはPassword（ある場合）
 - ID: 今回なし
