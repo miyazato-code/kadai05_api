@@ -23,7 +23,7 @@
 
 ### 7. フリー項目（感想、シェアしたいこと等なんでも）
 - `async`の中でしか`await`は使えない、一時停止ボタン
-- `promise.rece([a, b])`は、配列の中で、一番早く出た結果を採用
+- `promise.race([a, b])`は、配列の中で、一番早く出た結果を採用
 
 **参考記事**
 - [async](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function)
