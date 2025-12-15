@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAL</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div id="start-screen" class="start-screen">
+        <div class="start-screen__content">
+            <h1>HAL</h1>
+            <p>It can only be attributable to human error.</p>
+            <button id="start-button" class="start-screen__button">What's the problem?</button>
+        </div>
+    </div>
+    <div class="screensaver">
+        <div class="screensaver__image-container">
+            <img id="nasa-image" src="" alt="NASA APOD Image" class="screensaver__image">
+        </div>
+    </div>
+
+    <div id="info-overlay" class="info-card">
+        <h1 id="apod-title" class="info-card__title">NASA APOD...ロード中</h1>
+        <p id="apod-date" class="info-card__date"></p>
+        <p id="apod-explanation" class="info-card__explanation"></p>
+    </div>
+
+    <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+# macOS files
+.DS_Store
+
+# VS Code の設定ファイル
+.vscode/
+
+# NASA の設定　機密情報
+js/apiConfigSecrets.js

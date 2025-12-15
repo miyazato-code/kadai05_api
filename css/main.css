@@ -1,0 +1,247 @@
+/* BEM: block--screensaver */
+
+/* ---------------------------------------------------- */
+/* 0. ベースレイアウト: CSS Grid による12グリッドシステム */
+/* ---------------------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #000;
+    /* ロード時/画像なし時の背景色 */
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+/* ---------------------------------------------------- */
+/* 1. 画像コンテナ (.screensaver) */
+/* ---------------------------------------------------- */
+.screensaver {
+    /* Grid配置: 画面全体 (1列目/1行目から最終列/最終行まで) */
+    grid-column: 1 / span 12;
+    grid-row: 1 / span 12;
+
+    position: relative;
+    /* 子要素の配置基点 */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* エレメント: screensaver__image-container */
+.screensaver__image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* エレメント: screensaver__image (実際の画像) */
+.screensaver__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 画面全体を覆う */
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    /* フェードイン/アウト */
+
+    /* Ken Burns Effectの初期状態 */
+    transform: scale(1.05);
+    transform-origin: 50% 50%;
+}
+
+/* モディファイア: screensaver__image--loaded (ロード完了時に適用) */
+.screensaver__image--loaded {
+    opacity: 1;
+    /* アニメーションを開始 */
+    animation: kenburns 40s ease-out forwards;
+}
+
+/* Ken Burns Effect キーフレーム */
+@keyframes kenburns {
+    0% {
+        transform: scale(1.05) translate(0, 0);
+    }
+
+    100% {
+        transform: scale(1.00) translate(1%, 1%);
+        /* ズームアウトしつつ右下にわずかにパン */
+    }
+}
+
+/* ---------------------------------------------------- */
+/* 2. 情報カード (.info-card) */
+/* ---------------------------------------------------- */
+.info-card {
+    /* Grid配置: 中央寄せ */
+    grid-column: 4 / span 6;
+    grid-row: 4 / span 6;
+
+    z-index: 10;
+
+    /* Flexbox: カード内の要素を垂直に配置し、中央揃え */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* カード内の要素を垂直中央寄せ */
+    align-items: center;
+    /* カード内の要素を水平中央寄せ */
+
+    width: 100%;
+    max-width: 960px;
+    /* PCでの最大幅を制限 */
+
+    padding: 30px 40px;
+
+    background-color: rgba(6, 12, 35, 0.1);
+    color: #E0FFFF;
+
+    backdrop-filter: blur(12px);
+    /* ぼかしをさらに強め、背景画像を透過させつつノイズを減らす */
+
+    /* ★ 宇宙グロー効果の導入 ★ */
+    box-shadow:
+        0 0 10px rgba(0, 191, 255, 0.5),
+        /* 内部の淡いグロー */
+        0 0 20px rgba(0, 191, 255, 0.3);
+    /* 外部の弱いグロー */
+
+    /* グローをアニメーションさせるための設定 */
+    animation: neon-glow 3s ease-in-out infinite alternate;
+    /* 初期状態は非表示 */
+    opacity: 0;
+    /* フェードインとわずかな上昇アニメーション */
+    transition: opacity 2.5s ease-in-out, transform 1.5s ease-out;
+    transform: translateY(20px);
+    /* 最初は少し下に位置させる */
+
+    pointer-events: none;
+}
+
+/* モディファイア: info-card--visible (表示状態) */
+.info-card--visible {
+    opacity: 1;
+    transform: translateY(0);
+    /* 中央に移動 */
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-out;
+    pointer-events: auto;
+}
+
+@keyframes neon-glow {
+    0% {
+        box-shadow: 
+            0 0 5px rgba(0, 191, 255, 0.4), /* 弱いグロー */
+            0 0 10px rgba(0, 191, 255, 0.2);
+    }
+    100% {
+        box-shadow: 
+            0 0 15px rgba(77, 219, 255, 0.7), /* 強いグロー */
+            0 0 25px rgba(0, 191, 255, 0.4);
+    }
+}
+
+/* エレメント: info-card__title */
+.info-card__title {
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* エレメント: info-card__date */
+.info-card__date {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* エレメント: info-card__explanation (全て常時表示、ホバーアニメーションなし) */
+.info-card__explanation {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+    /* 両端揃え（読みやすさ向上） */
+    max-height: none;
+    /* コンテンツ全体を表示 */
+    opacity: 1;
+    /* 常に表示 */
+}
+
+
+.start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95); /* ほぼ真っ黒 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    color: #FF6347; /* HALカラー */
+    font-family: 'Consolas', monospace;
+}
+
+.start-screen__content {
+    text-align: center;
+    padding: 30px;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    /* HALグローを適用 */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+.start-screen__content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #FFFFFF;
+}
+
+.start-screen__content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.start-screen__button {
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: #FF6347; /* トマトレッド */
+    color: black;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.start-screen__button:hover {
+    background-color: #FF4500; /* より濃いオレンジレッド */
+    transform: scale(1.05);
+}
+
+
+/* ---------------------------------------------------- */
+/* 3. レスポンシブ調整 (モバイル対応) */
+/* ---------------------------------------------------- */
+@media (max-width: 768px) {
+    .info-card {
+        /* スマホではより多くの列を占有し、画面上下の余白を増やす */
+        grid-column: 2 / span 10;
+        /* 2列目から10列分 (左右に1列ずつ余白) */
+        grid-row: 3 / span 8;
+        padding: 20px 20px;
+    }
+
+    .info-card__title {
+        font-size: 1.5rem;
+    }
+}
