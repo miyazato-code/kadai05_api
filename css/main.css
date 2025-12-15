@@ -66,12 +66,12 @@ body {
 /* Ken Burns Effect キーフレーム */
 @keyframes kenburns {
     0% {
-        transform: scale(1.05) translate(0, 0);
+        transform: scale(1.00) translate(0, 0);
     }
 
     100% {
-        transform: scale(1.00) translate(1%, 1%);
-        /* ズームアウトしつつ右下にわずかにパン */
+        transform: scale(1.05) translate(1%, 1%);
+        /* ズームインしつつ右下にわずかにパン */
     }
 }
 
