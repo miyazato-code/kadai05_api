@@ -6,7 +6,7 @@ import { nasaApiKey } from "/js/apiConfigSecrets.js";
 // 設定と定数
 // ----------------------------------------------------
 const APOD_URL = 'https://api.nasa.gov/planetary/apod';
-const API_KEY = nasaApiKey.NASA_API_KEY ?? 'DEMO_KEY'; 
+const API_KEY = nasaApiKey.NASA_API_KEY || 'DEMO_KEY'; 
 
 // ★ TOTAL_CYCLE_MSは削除し、TTS完了に依存する
 
